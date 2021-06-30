@@ -100,6 +100,9 @@ const dataSlice = createSlice({
       }
       state.modalData.push(action.payload.data);
     },
+    setTaskTotal: (state, action) => {
+      state.taskTotal.push();
+    },
   },
 });
 
