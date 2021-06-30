@@ -7,21 +7,15 @@ import { useSelector } from "react-redux";
 function Card(props) {
   const [cardHeight, setCardHeight] = useState(true);
 
-  const tasks = useSelector((state) => state.taskTotal);
-
   const expandHandler = () => {
     setCardHeight(!cardHeight);
   };
-
-  useEffect(() => {
-    showTask();
-  }, [tasks]);
 
   const showTask = () => {
     return props.task.length === 0 ? (
       <h1>No Data Found</h1>
     ) : (
-      tasks.map((el) => {
+      props.task.map((el) => {
         return (
           el.status === props.taskType && (
             <li key={el.id}>
@@ -45,7 +39,7 @@ function Card(props) {
         <h3>{props.taskType} Task</h3>
       </header>
       <ul>{showTask()}</ul>
-      {/* {taskLength > 1 && (
+      {props.task.length > 1 && (
         <footer
           className={classes.footer}
           onClick={expandHandler}
@@ -53,14 +47,14 @@ function Card(props) {
         >
           <ExpandLessOutlinedIcon />
         </footer>
-      )} */}
-      <footer
+      )}
+      {/* <footer
         className={classes.footer}
         onClick={expandHandler}
         style={{ transform: cardHeight ? "rotate(180deg)" : "rotate(0deg)" }}
       >
         <ExpandLessOutlinedIcon />
-      </footer>
+      </footer> */}
     </div>
   );
 }

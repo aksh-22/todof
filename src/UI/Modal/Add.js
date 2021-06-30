@@ -2,6 +2,28 @@ import React, { useState } from "react";
 import classes from "./Add.module.css";
 import { useDispatch, useSelector } from "react-redux";
 import { dataActions } from "../../Store";
+import TextField from '@material-ui/core/TextField';
+import MenuItem from '@material-ui/core/MenuItem';
+import Button from '@material-ui/core/Button';
+
+const prior = [
+  {
+    value: 'High',
+    label: '$',
+  },
+  {
+    value: 'Medium',
+    label: '€',
+  },
+  {
+    value: 'Low',
+    label: '฿',
+  },
+  {
+    value: 'More Prior',
+    label: '¥',
+  },
+];
 
 export default function Add() {
   const [title, setTitle] = useState("");
@@ -51,51 +73,63 @@ export default function Add() {
 
   return (
     <form className={classes.form} onSubmit={addTask}>
-      <label>
-        Title:
-        <input type="text" name="Title" value={title} onChange={enterName} />
-      </label>
-      <label>
-        Descrition:
-        <input
-          type="text"
-          name="Descrition"
-          value={descrition}
-          onChange={enterDescrition}
-        />
-      </label>
-      <label>
-        Date:
-        <input type="date" name="Date" value={date} onChange={enterDate} />
-      </label>
-      <label>
-        Assigned To:
-        <input
-          type="text"
-          name="Assigned"
-          value={assigned}
-          onChange={EnterAssigned}
-        />
-      </label>
-      <label>
-        Priority:
-        <input
-          type="number"
-          name="Priority"
-          value={priority}
-          onChange={EnterPriority}
-        />
-      </label>
-      <label>
-        Duration:(In Days)
-        <input
-          type="number"
-          name="Duration"
-          value={duration}
-          onChange={EnterDuration}
-        />
-      </label>
-      <input type="submit" value="Submit" />
+      <TextField id="outlined-basic" label="title" variant="outlined" value={title} onChange={enterName} inputProps={{ maxLength: 120, }} />
+      <TextField id="outlined-basic" label="descrition" variant="outlined" value={descrition}
+        onChange={enterDescrition} />
+      <TextField
+        id="date"
+        label="Deadline"
+        type="date"
+        defaultValue="2017-05-24"
+        className={classes.textField}
+        value={date}
+        onChange={enterDate}
+
+        InputLabelProps={{
+          shrink: true,
+        }}
+      />
+      <TextField id="outlined-basic" label="Assigned To" variant="outlined" value={assigned} onChange={EnterAssigned} />
+      <TextField
+        id="standard-select-currency"
+        select
+        label="Select"
+        value={priority}
+        onChange={EnterPriority}
+        helperText="Please select priority of task"
+      >
+        {prior.map((option) => (
+          <MenuItem key={option.value} value={option.value}>
+            {option.value}
+          </MenuItem>
+        ))}
+      </TextField>
+      <TextField
+        id="outlined-number"
+        label="priority"
+        type="number"
+        InputLabelProps={{
+          shrink: true,
+        }}
+        variant="outlined"
+        value={priority}
+        onChange={EnterPriority}
+        inputProps={{ minLength: 5 }}
+      />
+      <TextField
+        id="outlined-number"
+        label="Duration"
+        type="number"
+        InputLabelProps={{
+          shrink: true,
+        }}
+        variant="outlined"
+        value={duration}
+        onChange={EnterDuration}
+      />
+      <Button variant="contained" color="primary" onClick={addTask}>
+        Submit
+      </Button>
     </form>
   );
 }
