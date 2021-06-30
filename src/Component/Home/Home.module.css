@@ -1,0 +1,22 @@
+.home {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.closest {
+  margin: 1em auto;
+}
+
+.recent {
+  margin: 1em auto;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: flex-start;
+}
+
+.recent > * {
+  margin: 1em;
+}
