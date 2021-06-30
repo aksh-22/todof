@@ -1,5 +1,7 @@
 import React, { useState } from "react";
 import classes from "./Add.module.css";
+import { useDispatch, useSelector } from "react-redux";
+import { dataActions } from "../../Store";
 
 export default function Add() {
   const [title, setTitle] = useState("");
@@ -8,6 +10,8 @@ export default function Add() {
   const [assigned, setAssigned] = useState("");
   const [priority, setPriority] = useState(0);
   const [duration, setDuration] = useState(0);
+
+  const dispath = useDispatch();
 
   const enterName = (e) => {
     setTitle(e.target.value);
@@ -30,6 +34,18 @@ export default function Add() {
 
   const addTask = (e) => {
     e.preventDefault();
+    dispath(
+      dataActions.setTaskTotal({
+        id: 8568,
+        title: title,
+        descrition: descrition,
+        assignedDate: date,
+        assignedTo: assigned,
+        priority: priority,
+        duration: duration,
+        status: "Pending",
+      })
+    );
     console.log(title, descrition, date, assigned, priority, duration);
   };
 

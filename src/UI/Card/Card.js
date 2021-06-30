@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import classes from "./Card.module.css";
 import CardElement from "./CardElement";
 import ExpandLessOutlinedIcon from "@material-ui/icons/ExpandLessOutlined";
@@ -12,6 +12,10 @@ function Card(props) {
   const expandHandler = () => {
     setCardHeight(!cardHeight);
   };
+
+  useEffect(() => {
+    showTask();
+  }, [tasks]);
 
   const showTask = () => {
     return props.task.length === 0 ? (
