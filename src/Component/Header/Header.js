@@ -16,6 +16,9 @@ function Header() {
         <NavLink to="/pending" activeClassName={classes.active}>
           Pending
         </NavLink>
+        <NavLink to="/employee" activeClassName={classes.active}>
+          Employee
+        </NavLink>
       </nav>
     </div>
   );

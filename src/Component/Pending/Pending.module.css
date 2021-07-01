@@ -1,0 +1,42 @@
+.completed {
+  /* margin: 1em; */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  /* flex-wrap: wrap; */
+  justify-content: center;
+  width: 100%;
+}
+
+.head {
+  display: flex;
+  list-style: none;
+  flex-wrap: wrap;
+  /* width: 100%; */
+}
+
+.head li {
+  padding: 1em;
+  margin: 1em;
+  background: rgb(255, 255, 255);
+  width: auto;
+  display: flex;
+  justify-content: center;
+  border: 1px solid #000;
+  border-radius: 5px;
+  align-items: center;
+}
+
+.dateRange {
+  /* width: 100% !important; */
+}
+
+.dateRange > * {
+  margin: 0 1em !important;
+  padding: 1em;
+}
+
+.listCard {
+  width: 70%;
+  margin-top: 2em;
+}

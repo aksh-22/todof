@@ -14,9 +14,12 @@
 }
 
 .element.checked {
-  position: absolute;
   transform: translateX(-100em);
   transition: transform 0.5s ease-in-out;
+}
+
+.element.checked.abs {
+  position: absolute;
 }
 
 .element > * {

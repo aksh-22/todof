@@ -1,45 +1,45 @@
 .card {
-	display: block;
-	width: 25em;
-	min-height: 5em;
-	overflow: hidden;
-	transition: height 0.3s linear;
-	position: relative;
-	border-radius: 10px;
-	box-shadow: 4px 4px 5px -2px rgba(0, 0, 0, 0.79);
-	-webkit-box-shadow: 4px 4px 5px -2px rgba(0, 0, 0, 0.79);
-	-moz-box-shadow: 4px 4px 5px -2px rgba(0, 0, 0, 0.79);
-	/* color: rgb(158, 197, 84); */
+  display: block;
+  width: 80%;
+  min-height: 5em;
+  overflow: hidden;
+  transition: height 0.3s linear;
+  position: relative;
+  border-radius: 10px;
+  box-shadow: 4px 4px 5px -2px rgba(0, 0, 0, 0.79);
+  -webkit-box-shadow: 4px 4px 5px -2px rgba(0, 0, 0, 0.79);
+  -moz-box-shadow: 4px 4px 5px -2px rgba(0, 0, 0, 0.79);
+  /* color: rgb(158, 197, 84); */
 }
 
 .header {
-	padding: 1em 1em;
-	color: #fff;
-	text-align: center;
+  padding: 1em 1em;
+  color: #fff;
+  text-align: center;
 }
 
 .card ul {
-	list-style: none;
-	margin: auto;
-	text-align: center;
-	color: #fff;
+  list-style: none;
+  margin: auto;
+  text-align: center;
+  color: #fff;
 }
 
 .footer {
-	position: absolute;
-	bottom: 0;
-	left: 50%;
-	transform: translateX(-50%);
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
 }
 
 .footer svg {
-	border-radius: 50%;
-	background: rgba(160, 157, 157, 0.815);
-	cursor: pointer;
-	transform: rotate(0deg);
-	transition: transform 3s linear;
+  border-radius: 50%;
+  background: rgba(160, 157, 157, 0.815);
+  cursor: pointer;
+  transform: rotate(0deg);
+  transition: transform 3s linear;
 }
 
 .footer svg.active {
-	transform: rotate(180deg);
+  transform: rotate(180deg);
 }

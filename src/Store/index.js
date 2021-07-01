@@ -7,9 +7,9 @@ const initialState = {
       title: "Todo",
       descrition:
         "Finished task with given functionalities in the pdf and feel free to add more functionalities in your web app and create ui on your own",
-      assignedDate: "30th june 2021",
+      assignedDate: "2021-06-30",
       assignedTo: "Akash",
-      priority: 3,
+      priority: "High",
       duration: 3,
       status: "Pending",
     },
@@ -18,9 +18,9 @@ const initialState = {
       title: "Employee Data",
       descrition:
         "Finished task with given functionalities in the pdf and feel free to add more functionalities in your web app and create ui on your own",
-      assignedDate: "28th june 2021",
-      assignedTo: "Akash",
-      priority: 2,
+      assignedDate: "2021-06-28",
+      assignedTo: "Mike",
+      priority: "Medium",
       duration: 2,
       status: "Completed",
     },
@@ -29,9 +29,9 @@ const initialState = {
       title: "Portfolio",
       descrition:
         "Finished task with given functionalities in the pdf and feel free to add more functionalities in your web app and create ui on your own",
-      assignedDate: "5th july 2021",
-      assignedTo: "Akash",
-      priority: 1,
+      assignedDate: "2021-07-05",
+      assignedTo: "Vinay",
+      priority: "Low",
       duration: 5,
       status: "Pending",
     },
@@ -40,9 +40,9 @@ const initialState = {
       title: "Website",
       descrition:
         "Finished task with given functionalities in the pdf and feel free to add more functionalities in your web app and create ui on your own",
-      assignedDate: "10th july 2021",
-      assignedTo: "Akash",
-      priority: 1,
+      assignedDate: "2021-07-10",
+      assignedTo: "Kapil",
+      priority: "Low",
       duration: 4,
       status: "Pending",
     },
@@ -51,38 +51,101 @@ const initialState = {
       title: "Stock",
       descrition:
         "Finished task with given functionalities in the pdf and feel free to add more functionalities in your web app and create ui on your own",
-      assignedDate: "26th july 2021",
+      assignedDate: "2021-07-26",
       assignedTo: "Akash",
-      priority: 3,
+      priority: "High",
       duration: 2,
       status: "Completed",
     },
     {
       id: 8566,
+      title: "Stock",
+      descrition:
+        "Finished task with given functionalities in the pdf and feel free to add more functionalities in your web app and create ui on your own",
+      assignedDate: "2021-07-28",
+      assignedTo: "Mike",
+      priority: "High",
+      duration: 2,
+      status: "Completed",
+    },
+    {
+      id: 8567,
+      title: "Stock",
+      descrition:
+        "Finished task with given functionalities in the pdf and feel free to add more functionalities in your web app and create ui on your own",
+      assignedDate: "2021-07-29",
+      assignedTo: "Vinay",
+      priority: "High",
+      duration: 1,
+      status: "Completed",
+    },
+    {
+      id: 8568,
+      title: "Stock",
+      descrition:
+        "Finished task with given functionalities in the pdf and feel free to add more functionalities in your web app and create ui on your own",
+      assignedDate: "2021-08-02",
+      assignedTo: "Kapil",
+      priority: "Low",
+      duration: 4,
+      status: "Completed",
+    },
+    {
+      id: 8569,
       title: "OS Design",
       descrition:
         "Finished task with given functionalities in the pdf and feel free to add more functionalities in your web app and create ui on your own",
-      assignedDate: "22nd june 2021",
-      assignedTo: "Akash",
-      priority: 1,
+      assignedDate: "2021-08-12",
+      assignedTo: "Mike",
+      priority: "Low",
       duration: 10,
       status: "Dead",
     },
     {
-      id: 8567,
+      id: 8570,
       title: "OS Design",
       descrition:
         "Finished task with given functionalities in the pdf and feel free to add more functionalities in your web app and create ui on your own",
-      assignedDate: "22nd june 2021",
-      assignedTo: "Akash",
-      priority: 1,
-      duration: 10,
+      assignedDate: "2021-08-14",
+      assignedTo: "Vinay",
+      priority: "More Prior",
+      duration: 2,
       status: "Closest",
+    },
+    {
+      id: 8571,
+      title: "OS Design",
+      descrition:
+        "Finished task with given functionalities in the pdf and feel free to add more functionalities in your web app and create ui on your own",
+      assignedDate: "2021-08-16",
+      assignedTo: "Vinay",
+      priority: "More Prior",
+      duration: 2,
+      status: "Completed",
     },
   ],
   modalActive: false,
   modalTypeAdd: true,
   modalData: [],
+  taskId: 8572,
+  employeePoints: [
+    {
+      value: "Akash",
+      points: 0,
+    },
+    {
+      value: "Mike",
+      points: 0,
+    },
+    {
+      value: "Vinay",
+      points: 0,
+    },
+    {
+      value: "Kapil",
+      points: 0,
+    },
+  ],
 };
 
 const dataSlice = createSlice({
@@ -95,15 +158,34 @@ const dataSlice = createSlice({
     setModalData: (state, action) => {
       if (action.payload.modalType === "view") {
         state.modalTypeAdd = false;
+        state.modalData = [action.payload.data];
       } else {
         state.modalTypeAdd = true;
       }
-      state.modalData.push(action.payload.data);
     },
     setTaskTotal: (state, action) => {
-      console.log(state.taskTotal)
       state.taskTotal.push(action.payload);
-      console.log(state.taskTotal)
+      state.taskId += state.taskId;
+    },
+    setTaskStatus: (state, action) => {
+      state.taskTotal.forEach((el, index) => {
+        if (el.id === action.payload) {
+          state.taskTotal[index].status = "Completed";
+          state.employeePoints.forEach((el, i2) => {
+            if (el.value === state.taskTotal[index].assignedTo) {
+              if (state.taskTotal[index].priority === "High") {
+                state.employeePoints[i2].points += 20;
+              } else if (state.taskTotal[index].priority === "Normal") {
+                state.employeePoints[i2].points += 10;
+              } else if (state.taskTotal[index].priority === "Low") {
+                state.employeePoints[i2].points += 5;
+              } else if (state.taskTotal[index].priority === "More Prior") {
+                state.employeePoints[i2].points += 50;
+              }
+            }
+          });
+        }
+      });
     },
   },
 });

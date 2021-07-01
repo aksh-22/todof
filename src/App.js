@@ -5,6 +5,7 @@ import Completed from "./Component/Completed/Completed";
 import Pending from "./Component/Pending/Pending";
 import Header from "./Component/Header/Header";
 import Modal from "./UI/Modal/Modal";
+import Employee from "./Component/Employee/Employee";
 import IconButton from "@material-ui/core/IconButton";
 import { dataActions } from "./Store";
 
@@ -39,6 +40,9 @@ function App() {
       </Route>
       <Route path="/pending">
         <Pending />
+      </Route>
+      <Route path="/employee">
+        <Employee />
       </Route>
       <div className="addBtn" onClick={modalHandler}>
         <IconButton>

@@ -1,0 +1,24 @@
+.employee {
+  display: grid;
+  grid-template-columns: 1fr;
+  list-style: none;
+  padding: 1em;
+  grid-gap: 1em;
+  width: 50%;
+  justify-content: center;
+  align-items: center;
+  margin: 3em auto;
+  border: 2px solid #000;
+}
+
+.employee li {
+  display: flex;
+  justify-content: space-evenly;
+}
+
+.employee li > * {
+  border: 2px solid #000;
+  flex-basis: 100%;
+  padding: 1em;
+  text-align: center;
+}

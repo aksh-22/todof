@@ -1,12 +1,11 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import classes from "./Card.module.css";
 import CardElement from "./CardElement";
 import ExpandLessOutlinedIcon from "@material-ui/icons/ExpandLessOutlined";
-import { useSelector } from "react-redux";
+// import { useSelector } from "react-redux";
 
 function Card(props) {
   const [cardHeight, setCardHeight] = useState(true);
-
   const expandHandler = () => {
     setCardHeight(!cardHeight);
   };
@@ -19,7 +18,13 @@ function Card(props) {
         return (
           el.status === props.taskType && (
             <li key={el.id}>
-              <CardElement name={el.title} user={el.assignedTo} />
+              <CardElement
+                name={el.title}
+                user={el.assignedTo}
+                id={el.id}
+                status={el.status}
+                data={el}
+              />
             </li>
           )
         );
@@ -32,7 +37,7 @@ function Card(props) {
       className={classes.card}
       style={{
         background: props.bgColor,
-        height: cardHeight ? "15em" : "auto",
+        height: cardHeight ? "15em" : `${props.task.length * 8 + 12}em`,
       }}
     >
       <header className={classes.header}>
@@ -48,13 +53,6 @@ function Card(props) {
           <ExpandLessOutlinedIcon />
         </footer>
       )}
-      {/* <footer
-        className={classes.footer}
-        onClick={expandHandler}
-        style={{ transform: cardHeight ? "rotate(180deg)" : "rotate(0deg)" }}
-      >
-        <ExpandLessOutlinedIcon />
-      </footer> */}
     </div>
   );
 }

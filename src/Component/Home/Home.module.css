@@ -7,16 +7,22 @@
 
 .closest {
   margin: 1em auto;
-}
-
-.recent {
-  margin: 1em auto;
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
   align-items: flex-start;
+  width: 80%;
+}
+
+.recent {
+  /* margin: 1em auto; */
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  width: 80%;
+  align-items: flex-start;
 }
 
 .recent > * {
-  margin: 1em;
+  margin: 1em auto;
 }
