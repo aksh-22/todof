@@ -31,4 +31,5 @@
 
 .employee li ul li {
   border: 1px solid #000;
+  padding: 0.5em 1em;
 }
