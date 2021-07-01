@@ -131,19 +131,19 @@ const initialState = {
   employeePoints: [
     {
       value: "Akash",
-      points: 0,
+      points: [],
     },
     {
       value: "Mike",
-      points: 0,
+      points: [],
     },
     {
       value: "Vinay",
-      points: 0,
+      points: [],
     },
     {
       value: "Kapil",
-      points: 0,
+      points: [],
     },
   ],
 };
@@ -173,14 +173,16 @@ const dataSlice = createSlice({
           state.taskTotal[index].status = "Completed";
           state.employeePoints.forEach((el, i2) => {
             if (el.value === state.taskTotal[index].assignedTo) {
-              if (state.taskTotal[index].priority === "High") {
-                state.employeePoints[i2].points += 20;
+              if (state.taskTotal[index].status === "Undue") {
+                state.employeePoints[i2].points.push(-10);
+              } else if (state.taskTotal[index].priority === "High") {
+                state.employeePoints[i2].points.push(20);
               } else if (state.taskTotal[index].priority === "Normal") {
-                state.employeePoints[i2].points += 10;
+                state.employeePoints[i2].points.push(10);
               } else if (state.taskTotal[index].priority === "Low") {
-                state.employeePoints[i2].points += 5;
+                state.employeePoints[i2].points.push(6);
               } else if (state.taskTotal[index].priority === "More Prior") {
-                state.employeePoints[i2].points += 50;
+                state.employeePoints[i2].points.push(50);
               }
             }
           });
