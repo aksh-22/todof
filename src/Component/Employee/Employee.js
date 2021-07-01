@@ -10,7 +10,11 @@ export default function Employee() {
       return (
         <li key={el.value}>
           <p>{el.value}</p>
-          <p>{el.points}</p>
+          <ul>
+            {el.points.map((elP) => (
+              <li key={Math.floor(el.value * Math.random * 10000)}>{elP}</li>
+            ))}
+          </ul>
         </li>
       );
     });

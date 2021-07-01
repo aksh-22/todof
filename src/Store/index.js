@@ -123,6 +123,28 @@ const initialState = {
       duration: 2,
       status: "Completed",
     },
+    {
+      id: 8571,
+      title: "OS Design",
+      descrition:
+        "Finished task with given functionalities in the pdf and feel free to add more functionalities in your web app and create ui on your own",
+      assignedDate: "2021-08-16",
+      assignedTo: "Vinay",
+      priority: "More Prior",
+      duration: 2,
+      status: "Pending",
+    },
+    {
+      id: 8572,
+      title: "OS Design",
+      descrition:
+        "Finished task with given functionalities in the pdf and feel free to add more functionalities in your web app and create ui on your own",
+      assignedDate: "2021-08-16",
+      assignedTo: "Vinay",
+      priority: "More Prior",
+      duration: 2,
+      status: "Undue",
+    },
   ],
   modalActive: false,
   modalTypeAdd: true,
@@ -131,19 +153,19 @@ const initialState = {
   employeePoints: [
     {
       value: "Akash",
-      points: [],
+      points: [0],
     },
     {
       value: "Mike",
-      points: [],
+      points: [0],
     },
     {
       value: "Vinay",
-      points: [],
+      points: [0],
     },
     {
       value: "Kapil",
-      points: [],
+      points: [0],
     },
   ],
 };

@@ -1,18 +1,19 @@
 .employee {
   display: grid;
-  grid-template-columns: 1fr;
+  grid-template-columns: 1fr 1fr 1fr 1fr;
   list-style: none;
   padding: 1em;
   grid-gap: 1em;
   width: 50%;
   justify-content: center;
-  align-items: center;
+  align-items: flex-start;
   margin: 3em auto;
   border: 2px solid #000;
 }
 
 .employee li {
   display: flex;
+  flex-direction: column;
   justify-content: space-evenly;
 }
 
@@ -21,4 +22,13 @@
   flex-basis: 100%;
   padding: 1em;
   text-align: center;
+}
+
+.employee li ul {
+  display: flex;
+  flex-direction: column;
+}
+
+.employee li ul li {
+  border: 1px solid #000;
 }
