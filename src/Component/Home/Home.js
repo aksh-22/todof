@@ -49,6 +49,10 @@ function Home() {
           const newArr = [...prev, el];
           return newArr;
         });
+        setPending((prev) => {
+          const newArr = [...prev, el];
+          return newArr;
+        });
       } else if (el.status === "Pending") {
         // console.log(parseInt(el.assignedDate.split("-").join("")));
         setPending((prev) => {
