@@ -10,9 +10,9 @@ function Header() {
         <NavLink to="/home" activeClassName={classes.active}>
           Home
         </NavLink>
-        <NavLink to="/home2" activeClassName={classes.active}>
+        {/* <NavLink to="/home2" activeClassName={classes.active}>
           Home2
-        </NavLink>
+        </NavLink> */}
         <NavLink to="/completed" activeClassName={classes.active}>
           Completed
         </NavLink>

@@ -3,6 +3,7 @@ import Card from "../../UI/Card/Card";
 import classes from "./Home.module.css";
 import { useSelector } from "react-redux";
 import Notification from "../../UI/Notification/Notification";
+import moment from "moment";
 
 function Home() {
   const [closest, setClosest] = useState([]);
@@ -15,6 +16,8 @@ function Home() {
   const [init, setInit] = useState(true);
 
   const tasks = useSelector((state) => state.taskTotal);
+
+  console.log("aaaaa", moment().format());
 
   const getTime = () => {
     const year = new Date().getUTCFullYear();
