@@ -1,155 +1,14 @@
 import { configureStore, createSlice } from "@reduxjs/toolkit";
+import storage from "redux-persist/lib/storage";
+import { combineReducers } from "redux";
+import { persistReducer } from "redux-persist";
 
 const initialState = {
-  taskTotal: [
-    {
-      id: 8561,
-      title: "Todo",
-      descrition:
-        "Finished task with given functionalities in the pdf and feel free to add more functionalities in your web app and create ui on your own",
-      assignedDate: "2021-06-30",
-      assignedTo: "Akash",
-      priority: "High",
-      duration: 3,
-      status: "Pending",
-    },
-    {
-      id: 8562,
-      title: "Employee Data",
-      descrition:
-        "Finished task with given functionalities in the pdf and feel free to add more functionalities in your web app and create ui on your own",
-      assignedDate: "2021-06-28",
-      assignedTo: "Mike",
-      priority: "Medium",
-      duration: 2,
-      status: "Completed",
-    },
-    {
-      id: 8563,
-      title: "Portfolio",
-      descrition:
-        "Finished task with given functionalities in the pdf and feel free to add more functionalities in your web app and create ui on your own",
-      assignedDate: "2021-07-05",
-      assignedTo: "Vinay",
-      priority: "Low",
-      duration: 5,
-      status: "Pending",
-    },
-    {
-      id: 8564,
-      title: "Website",
-      descrition:
-        "Finished task with given functionalities in the pdf and feel free to add more functionalities in your web app and create ui on your own",
-      assignedDate: "2021-07-10",
-      assignedTo: "Kapil",
-      priority: "Low",
-      duration: 4,
-      status: "Pending",
-    },
-    {
-      id: 8565,
-      title: "Stock",
-      descrition:
-        "Finished task with given functionalities in the pdf and feel free to add more functionalities in your web app and create ui on your own",
-      assignedDate: "2021-07-26",
-      assignedTo: "Akash",
-      priority: "High",
-      duration: 2,
-      status: "Completed",
-    },
-    {
-      id: 8566,
-      title: "Stock",
-      descrition:
-        "Finished task with given functionalities in the pdf and feel free to add more functionalities in your web app and create ui on your own",
-      assignedDate: "2021-07-28",
-      assignedTo: "Mike",
-      priority: "High",
-      duration: 2,
-      status: "Completed",
-    },
-    {
-      id: 8567,
-      title: "Stock",
-      descrition:
-        "Finished task with given functionalities in the pdf and feel free to add more functionalities in your web app and create ui on your own",
-      assignedDate: "2021-07-29",
-      assignedTo: "Vinay",
-      priority: "High",
-      duration: 1,
-      status: "Completed",
-    },
-    {
-      id: 8568,
-      title: "Stock",
-      descrition:
-        "Finished task with given functionalities in the pdf and feel free to add more functionalities in your web app and create ui on your own",
-      assignedDate: "2021-08-02",
-      assignedTo: "Kapil",
-      priority: "Low",
-      duration: 4,
-      status: "Completed",
-    },
-    {
-      id: 8569,
-      title: "OS Design",
-      descrition:
-        "Finished task with given functionalities in the pdf and feel free to add more functionalities in your web app and create ui on your own",
-      assignedDate: "2021-08-12",
-      assignedTo: "Mike",
-      priority: "Low",
-      duration: 10,
-      status: "Dead",
-    },
-    {
-      id: 8570,
-      title: "OS Design",
-      descrition:
-        "Finished task with given functionalities in the pdf and feel free to add more functionalities in your web app and create ui on your own",
-      assignedDate: "2021-08-14",
-      assignedTo: "Vinay",
-      priority: "More Prior",
-      duration: 2,
-      status: "Closest",
-    },
-    {
-      id: 8571,
-      title: "OS Design",
-      descrition:
-        "Finished task with given functionalities in the pdf and feel free to add more functionalities in your web app and create ui on your own",
-      assignedDate: "2021-08-16",
-      assignedTo: "Vinay",
-      priority: "More Prior",
-      duration: 2,
-      status: "Completed",
-    },
-    {
-      id: 8571,
-      title: "OS Design",
-      descrition:
-        "Finished task with given functionalities in the pdf and feel free to add more functionalities in your web app and create ui on your own",
-      assignedDate: "2021-08-16",
-      assignedTo: "Vinay",
-      priority: "More Prior",
-      duration: 2,
-      status: "Pending",
-    },
-    {
-      id: 8572,
-      title: "OS Design",
-      descrition:
-        "Finished task with given functionalities in the pdf and feel free to add more functionalities in your web app and create ui on your own",
-      assignedDate: "2021-08-16",
-      assignedTo: "Vinay",
-      priority: "More Prior",
-      duration: 2,
-      status: "Undue",
-    },
-  ],
+  taskTotal: [],
   modalActive: false,
   modalTypeAdd: true,
   modalData: [],
-  taskId: 8572,
+  taskId: 8573,
   employeePoints: [
     {
       value: "Akash",
@@ -188,25 +47,32 @@ const dataSlice = createSlice({
     setTaskTotal: (state, action) => {
       state.taskTotal.push(action.payload);
       state.taskId += state.taskId;
+      // localStorage.setItem("taskTotal", state.taskTotal);
+      // const a = localStorage.getItem("taskTotal");
+      // console.log(a);
     },
     setTaskStatus: (state, action) => {
+      let sign = true;
       state.taskTotal.forEach((el, index) => {
         if (el.id === action.payload) {
+          if (state.taskTotal[index].status === "Overdue") {
+            sign = false;
+          }
           state.taskTotal[index].status = "Completed";
           state.employeePoints.forEach((el, i2) => {
             if (el.value === state.taskTotal[index].assignedTo) {
-              if (state.taskTotal[index].status === "Undue") {
-                state.employeePoints[i2].points.push(-10);
-              } else if (state.taskTotal[index].priority === "High") {
-                state.employeePoints[i2].points.push(20);
+              if (state.taskTotal[index].priority === "High") {
+                console.log(sign);
+                state.employeePoints[i2].points.push(sign ? 20 : -20);
               } else if (state.taskTotal[index].priority === "Normal") {
-                state.employeePoints[i2].points.push(10);
+                state.employeePoints[i2].points.push(sign ? 20 : -10);
               } else if (state.taskTotal[index].priority === "Low") {
-                state.employeePoints[i2].points.push(6);
+                state.employeePoints[i2].points.push(sign ? 5 : -5);
               } else if (state.taskTotal[index].priority === "More Prior") {
-                state.employeePoints[i2].points.push(50);
+                state.employeePoints[i2].points.push(sign ? 50 : -50);
               }
             }
+            console.log(state.employeePoints);
           });
         }
       });
@@ -216,6 +82,13 @@ const dataSlice = createSlice({
 
 export const dataActions = dataSlice.actions;
 
-export const store = configureStore({
-  reducer: dataSlice.reducer,
+const persistConfig = {
+  key: "root",
+  storage,
+};
+const persistedReducer = persistReducer(persistConfig, dataSlice.reducer);
+const store = configureStore({
+  reducer: persistedReducer,
 });
+
+export { store };

@@ -27,14 +27,17 @@ export default function CardElement(props) {
   const handleClose = () => {
     setOpen(false);
   };
+  let userName;
 
-  let userName = props.user;
-  let taskName = props.name;
-  if (userName.length > 10) {
-    userName = `${userName.substring(0, 10)}...`;
+  if (props.data.assignedTo) {
+    userName = props.data.assignedTo;
+    if (userName.length > 10) {
+      userName = `${userName.substring(0, 10)}...`;
+    }
   }
+  let taskName = props.data.title;
   if (taskName.length > 10) {
-    taskName = `${userName.substring(0, 10)}...`;
+    taskName = `${taskName.substring(0, 10)}...`;
   }
 
   const checkHandler = () => {
@@ -72,7 +75,7 @@ export default function CardElement(props) {
         aria-labelledby="responsive-dialog-title"
       >
         <DialogTitle id="responsive-dialog-title">
-          {"Use Google's location service?"}
+          {"Task completion?"}
         </DialogTitle>
         <DialogContent>
           <DialogContentText>
@@ -89,12 +92,14 @@ export default function CardElement(props) {
         </DialogActions>
       </Dialog>
       <div className={classes.details}>
-        <Avatar aria-label="recipe" className={classes.avatar}>
-          {props.user.charAt(0)}
-        </Avatar>
+        {props.data.assignedTo && (
+          <Avatar aria-label="recipe" className={classes.avatar}>
+            {props.data.assignedTo && props.data.assignedTo.charAt(0)}
+          </Avatar>
+        )}
         {taskName}
       </div>
-      <span className={classes.user}>-{userName}</span>
+      <span className={classes.user}>-{props.data.assignedTo && userName}</span>
       {/* <div className={classes.more} onClick={handleClickOpen}> */}
       <div className={classes.more} onClick={modalHandler}>
         <MoreHorizIcon />

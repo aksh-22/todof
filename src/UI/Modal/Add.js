@@ -67,7 +67,7 @@ export default function Add() {
     }
   };
   const enterDescrition = (e) => {
-    const regex = /^[A-Za-z0-9]+$/;
+    const regex = /^[A-Za-z0-9 ]+$/;
     const isValid = regex.test(e.target.value);
     if (!isValid) {
       alert("Special Characters are not allowed");
@@ -79,6 +79,7 @@ export default function Add() {
   };
   const enterDate = (e) => {
     setDateErr(false);
+    console.log(parseInt(e.target.value.split("-").join("")));
     setDate(e.target.value);
   };
   const EnterAssigned = (e) => {

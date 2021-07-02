@@ -5,10 +5,13 @@ import classes from "./Header.module.css";
 function Header() {
   return (
     <div className={classes.header}>
-      <h1>Todo Extended</h1>
+      <h3>Todo Extended</h3>
       <nav>
         <NavLink to="/home" activeClassName={classes.active}>
           Home
+        </NavLink>
+        <NavLink to="/home2" activeClassName={classes.active}>
+          Home2
         </NavLink>
         <NavLink to="/completed" activeClassName={classes.active}>
           Completed

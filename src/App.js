@@ -8,6 +8,7 @@ import Modal from "./UI/Modal/Modal";
 import Employee from "./Component/Employee/Employee";
 import IconButton from "@material-ui/core/IconButton";
 import { dataActions } from "./Store";
+import Home2 from "./Component/Home/Home2";
 
 import LibraryAddIcon from "@material-ui/icons/LibraryAdd";
 import { useDispatch, useSelector } from "react-redux";
@@ -34,6 +35,9 @@ function App() {
       </Route>
       <Route path="/home">
         <Home />
+      </Route>
+      <Route path="/home2">
+        <Home2 />
       </Route>
       <Route path="/completed">
         <Completed />

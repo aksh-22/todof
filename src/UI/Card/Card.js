@@ -11,8 +11,9 @@ function Card(props) {
   };
 
   const showTask = () => {
+    console.log(props.task.length);
     return props.task.length === 0 ? (
-      <h1>No Data Found</h1>
+      <h1 className={classes.noData}>No Data Found</h1>
     ) : (
       props.task.map((el) => {
         return (
@@ -35,20 +36,22 @@ function Card(props) {
   return (
     <div
       className={classes.card}
+      onClick={expandHandler}
       style={{
-        background: props.bgColor,
-        height: cardHeight ? "15em" : `${props.task.length * 8 + 12}em`,
+        height: cardHeight ? "2em" : `${props.task.length * 5 + 4}em`,
       }}
     >
       <header className={classes.header}>
         <h3>{props.taskType} Task</h3>
       </header>
       <ul>{showTask()}</ul>
-      {props.task.length > 1 && (
+      {props.task.length >= 0 && (
         <footer
           className={classes.footer}
           onClick={expandHandler}
-          style={{ transform: cardHeight ? "rotate(180deg)" : "rotate(0deg)" }}
+          style={{
+            transform: cardHeight ? "rotateX(180deg)" : "rotateX(0deg)",
+          }}
         >
           <ExpandLessOutlinedIcon />
         </footer>
