@@ -55,6 +55,8 @@ export default function Add() {
   const taskId = useSelector((state) => state.taskId);
 
   const dispath = useDispatch();
+  const currDat = Date.now();
+  // const days = currDat.getDays();
 
   const enterName = (e) => {
     const regex = /^[A-Za-z0-9 ]+$/;
@@ -164,7 +166,7 @@ export default function Add() {
         className={`${descritionErr && classes.error}`}
         helperText={descritionErr && "Please provide task description"}
       />
-      <TextField
+      {/* <TextField
         id="date"
         label="Deadline"
         type="date"
@@ -179,8 +181,26 @@ export default function Add() {
         InputLabelProps={{
           shrink: true,
         }}
-      />
+      /> */}
 
+      <label>
+        <input
+          type="date"
+          value={date}
+          onChange={enterDate}
+          min="2021-07-02"
+          // className={`${dateErr && classes.error}`}
+          // style={
+          //   dateErr ? { border: "1px solid red" } : { border: "1px solid black" }
+          // }
+          style={{ border: dateErr ? "1px solid red" : "1px solid black" }}
+        />
+        {dateErr ? (
+          <p style={{ fontSize: ".5em", color: "red" }}>select date</p>
+        ) : (
+          <p style={{ fontSize: ".5em" }}>select date</p>
+        )}
+      </label>
       <TextField
         id="outlined-basic"
         select
