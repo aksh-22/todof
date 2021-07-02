@@ -5,6 +5,7 @@ import { dataActions } from "../../Store";
 import TextField from "@material-ui/core/TextField";
 import MenuItem from "@material-ui/core/MenuItem";
 import Button from "@material-ui/core/Button";
+import { KeyboardDatePicker } from "@material-ui/pickers";
 
 const prior = [
   {
@@ -172,12 +173,14 @@ export default function Add() {
         className={classes.textField}
         value={date}
         onChange={enterDate}
+        minDate={new Date("06-06-2020")}
         className={`${dateErr && classes.error}`}
         helperText={dateErr && "Please select a date"}
         InputLabelProps={{
           shrink: true,
         }}
       />
+
       <TextField
         id="outlined-basic"
         select
@@ -197,7 +200,7 @@ export default function Add() {
         ))}
       </TextField>
       <TextField
-        id="standard-select-currency"
+        id="standard-select"
         select
         label="Select"
         value={priority}

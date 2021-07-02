@@ -11,7 +11,6 @@ function Card(props) {
   };
 
   const showTask = () => {
-    console.log(props.task.length);
     return props.task.length === 0 ? (
       <h1 className={classes.noData}>No Data Found</h1>
     ) : (
@@ -36,13 +35,13 @@ function Card(props) {
   return (
     <div
       className={classes.card}
-      onClick={expandHandler}
       style={{
         height: cardHeight ? "2em" : `${props.task.length * 5 + 4}em`,
       }}
     >
-      <header className={classes.header}>
+      <header className={classes.header} onClick={expandHandler}>
         <h3>{props.taskType} Task</h3>
+        <h3> {props.task.length} </h3>
       </header>
       <ul>{showTask()}</ul>
       {props.task.length >= 0 && (

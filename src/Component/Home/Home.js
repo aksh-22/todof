@@ -6,7 +6,7 @@ import Notification from "../../UI/Notification/Notification";
 
 function Home() {
   const [closest, setClosest] = useState([]);
-  const [currDate, setCurrDate] = useState(0);
+  const [currDate, setCurrDate] = useState("");
   const [pending, setPending] = useState([]);
   const [due, setDue] = useState([]);
   const [completed, setCompleted] = useState([]);
@@ -22,15 +22,15 @@ function Home() {
     month = month > 9 ? month : "0" + month;
     let date = new Date().getDate();
     date = date > 9 ? date : "0" + date;
-    const time = `${year}${month}${date}`;
-    setCurrDate(parseInt(time));
-    console.log("a");
+    const time = `${year}-${month}-${date}`;
+    // const timeInt = parseInt(time);
+    setCurrDate(time);
     // return parseInt(time);
   };
 
   useEffect(() => {
     getTime();
-    console.log(currDate);
+    console.log("a", currDate);
     setClosest([]);
     setPending([]);
     setCompleted([]);
@@ -52,19 +52,24 @@ function Home() {
           const newArr = [...prev, el];
           return newArr;
         });
-        const deadline =
-          parseInt(el.assignedDate.split("-").join("")) + parseInt(el.duration);
+        const taskDate = new Date(el.assignedDate);
+        console.log("taskDate", taskDate);
+        const deadline = taskDate.setDate(taskDate.getDate() + 3);
+        const cdn2 = Date.now();
         console.log("deadline", deadline);
-        console.log("currDate", currDate);
-        if (
-          parseInt(deadline - currDate) < 3 &&
-          parseInt(deadline - currDate) > 0
-        ) {
+        console.log("currDate", cdn2);
+        console.log(
+          "aaaaaaaaaaaaaaa",
+          parseInt(deadline - cdn2) < 3 && parseInt(deadline - cdn2) > 0
+        );
+        if (parseInt(deadline - cdn2) < 3 && parseInt(deadline - cdn2) > 0) {
+          console.log("aaaaaaaaa");
           if (init) {
             setNotification((prev) => {
               const newArr = [...prev, el];
               return newArr;
             });
+            console.log(notification);
           }
         }
       } else if (el.status === "Dead") {

@@ -94,9 +94,16 @@ export default function View() {
           <p>{modalData.descrition}</p>
         </div>
       </div>
-      <Button variant="contained" color="primary" onClick={handleClickOpen} className={classes.btn}>
-        Completed?
-      </Button>
+      {modalData.status !== "Completed" && (
+        <Button
+          variant="contained"
+          color="primary"
+          onClick={handleClickOpen}
+          className={classes.btn}
+        >
+          Completed?
+        </Button>
+      )}
     </Fragment>
   );
 }

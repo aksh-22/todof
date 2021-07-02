@@ -12,6 +12,8 @@ import DialogActions from "@material-ui/core/DialogActions";
 import DialogContent from "@material-ui/core/DialogContent";
 import DialogContentText from "@material-ui/core/DialogContentText";
 import DialogTitle from "@material-ui/core/DialogTitle";
+import VisibilityIcon from "@material-ui/icons/Visibility";
+import Paper from "@material-ui/core/Paper";
 
 export default function CardElement(props) {
   const [check, setCheck] = useState(false);
@@ -63,11 +65,17 @@ export default function CardElement(props) {
   };
 
   return (
-    <div
+    <Paper
+      elevation={3}
       className={`${classes.element} ${check && classes.checked} ${
         abs && classes.abs
       }`}
     >
+      {/* <div
+        className={`${classes.element} ${check && classes.checked} ${
+          abs && classes.abs
+        }`}
+      > */}
       <Dialog
         // fullScreen={fullScreen}
         open={open}
@@ -102,7 +110,8 @@ export default function CardElement(props) {
       <span className={classes.user}>-{props.data.assignedTo && userName}</span>
       {/* <div className={classes.more} onClick={handleClickOpen}> */}
       <div className={classes.more} onClick={modalHandler}>
-        <MoreHorizIcon />
+        <VisibilityIcon />
+        {/* <MoreHorizIcon /> */}
       </div>
       {props.status !== "Completed" && (
         <div className={classes.checkBox} onClick={handleClickOpen}>
@@ -110,6 +119,7 @@ export default function CardElement(props) {
           {check && <DoneSharpIcon />}
         </div>
       )}
-    </div>
+      {/* </div> */}
+    </Paper>
   );
 }
