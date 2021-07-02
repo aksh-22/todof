@@ -1,7 +1,21 @@
-import { configureStore, createSlice } from "@reduxjs/toolkit";
+import {
+  configureStore,
+  createSlice,
+  getDefaultMiddleware,
+} from "@reduxjs/toolkit";
 import storage from "redux-persist/lib/storage";
 import { combineReducers } from "redux";
-import { persistReducer } from "redux-persist";
+// import { persistReducer } from "redux-persist";
+import {
+  persistStore,
+  persistReducer,
+  FLUSH,
+  REHYDRATE,
+  PAUSE,
+  PERSIST,
+  PURGE,
+  REGISTER,
+} from "redux-persist";
 
 const initialState = {
   taskTotal: [],
@@ -89,6 +103,11 @@ const persistConfig = {
 const persistedReducer = persistReducer(persistConfig, dataSlice.reducer);
 const store = configureStore({
   reducer: persistedReducer,
+  middleware: getDefaultMiddleware({
+    serializableCheck: {
+      ignoredActions: [FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER],
+    },
+  }),
 });
 
 export { store };

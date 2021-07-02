@@ -50,31 +50,31 @@ function Home() {
           return newArr;
         });
       } else if (el.status === "Pending") {
-        console.log(parseInt(el.assignedDate.split("-").join("")));
+        // console.log(parseInt(el.assignedDate.split("-").join("")));
         setPending((prev) => {
           const newArr = [...prev, el];
           return newArr;
         });
-        const taskDate = new Date(el.assignedDate);
-        console.log("taskDate", taskDate);
-        const deadline = taskDate.setDate(taskDate.getDate() + 3);
-        const cdn2 = Date.now();
-        console.log("deadline", deadline);
-        console.log("currDate", cdn2);
-        console.log(
-          "aaaaaaaaaaaaaaa",
-          parseInt(deadline - cdn2) < 3 && parseInt(deadline - cdn2) > 0
-        );
-        if (parseInt(deadline - cdn2) < 3 && parseInt(deadline - cdn2) > 0) {
-          console.log("aaaaaaaaa");
-          if (init) {
-            setNotification((prev) => {
-              const newArr = [...prev, el];
-              return newArr;
-            });
-            console.log(notification);
-          }
-        }
+        // const taskDate = new Date(el.assignedDate);
+        // console.log("taskDate", taskDate);
+        // const deadline = taskDate.setDate(taskDate.getDate() + 3);
+        // const cdn2 = Date.now();
+        // console.log("deadline", deadline);
+        // console.log("currDate", cdn2);
+        // console.log(
+        //   "aaaaaaaaaaaaaaa",
+        //   parseInt(deadline - cdn2) < 3 && parseInt(deadline - cdn2) > 0
+        // );
+        // if (parseInt(deadline - cdn2) < 3 && parseInt(deadline - cdn2) > 0) {
+        //   console.log("aaaaaaaaa");
+        //   if (init) {
+        //     setNotification((prev) => {
+        //       const newArr = [...prev, el];
+        //       return newArr;
+        //     });
+        //     console.log(notification);
+        //   }
+        // }
       } else if (el.status === "Dead") {
         setDead((prev) => {
           const newArr = [...prev, el];
