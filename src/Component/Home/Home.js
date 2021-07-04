@@ -3,7 +3,7 @@ import Card from "../../UI/Card/Card";
 import classes from "./Home.module.css";
 import { useSelector } from "react-redux";
 import Notification from "../../UI/Notification/Notification";
-import moment from "moment";
+// import moment from "moment";
 
 function Home() {
   const [closest, setClosest] = useState([]);
@@ -16,8 +16,6 @@ function Home() {
   const [init, setInit] = useState(true);
 
   const tasks = useSelector((state) => state.taskTotal);
-
-  console.log("aaaaa", moment().format());
 
   const getTime = () => {
     const year = new Date().getUTCFullYear();
@@ -32,8 +30,8 @@ function Home() {
   };
 
   useEffect(() => {
-    getTime();
-    console.log("a", currDate);
+    // getTime();
+    // console.log("a", currDate);
     setClosest([]);
     setPending([]);
     setCompleted([]);
@@ -59,26 +57,39 @@ function Home() {
           const newArr = [...prev, el];
           return newArr;
         });
-        // const taskDate = new Date(el.assignedDate);
-        // console.log("taskDate", taskDate);
-        // const deadline = taskDate.setDate(taskDate.getDate() + 3);
-        // const cdn2 = Date.now();
-        // console.log("deadline", deadline);
-        // console.log("currDate", cdn2);
-        // console.log(
-        //   "aaaaaaaaaaaaaaa",
-        //   parseInt(deadline - cdn2) < 3 && parseInt(deadline - cdn2) > 0
-        // );
-        // if (parseInt(deadline - cdn2) < 3 && parseInt(deadline - cdn2) > 0) {
-        //   console.log("aaaaaaaaa");
-        //   if (init) {
-        //     setNotification((prev) => {
-        //       const newArr = [...prev, el];
-        //       return newArr;
-        //     });
-        //     console.log(notification);
-        //   }
-        // }
+        console.log(el)
+        // const year = new Date().getUTCFullYear();
+        // let month = new Date().getMonth();
+        // month = month > 9 ? month : "0" + month;
+        // let date = new Date().getDate();
+        // date = date > 9 ? date : "0" + date;
+        // const time = `${year}-${month}-${date}`;
+        const year = new Date().getUTCFullYear();
+        let month = new Date().getMonth() + 1;
+        // month = month > 9 ? month : "0" + month;
+        let date = new Date().getDate();
+        // date = date > 9 ? date : "0" + date;
+        const time = `${year}-${month}-${date}`;
+        const d1 = time.split('-')
+        const d2 = el.assignedDate.split('-')
+        if (parseInt(d2[1]) - parseInt(d1[1]) === 0) {
+          console.log('aaaaaaaaaaa')
+          console.log(parseInt(d2[2]) - parseInt(d1[2]))
+          if (parseInt(d2[2]) - parseInt(d1[2]) < 3) {
+            setNotification((prev) => {
+              const newArr = [...prev, el];
+              return newArr;
+            });
+          }
+        } else {
+          console.log(parseInt(d2[2]) + (30 * (parseInt(d2[1]) - parseInt(d1[1]))) - parseInt(d1[2]))
+          if ((parseInt(d2[2]) + (30 * (parseInt(d2[1]) - parseInt(d1[1]))) - parseInt(d1[2])) < 3) {
+            setNotification((prev) => {
+              const newArr = [...prev, el];
+              return newArr;
+            });
+          }
+        }
       } else if (el.status === "Dead") {
         setDead((prev) => {
           const newArr = [...prev, el];

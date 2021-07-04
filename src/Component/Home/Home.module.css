@@ -1,27 +1,27 @@
 .home {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  width: 100%;
-  flex-wrap: wrap;
-  align-items: flex-start;
-  position: relative;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	width: 100%;
+	flex-wrap: wrap;
+	align-items: flex-start;
+	position: relative;
 }
 
 .home > * {
-  margin: 1em;
-  width: 70%;
-  /* background: rgb(0, 0, 0) !important; */
+	margin: 1em;
+	width: 60%;
+	/* background: rgb(0, 0, 0) !important; */
 }
 
 .notification {
-  position: absolute;
-  top: 5%;
-  right: 0;
-  width: 15em;
-  height: 10em;
-  z-index: 10;
-  list-style: none;
+	position: absolute;
+	top: 5%;
+	right: 0;
+	width: 15em;
+	height: 10em;
+	z-index: 10;
+	list-style: none;
 }
 /* 
 .notification > * {

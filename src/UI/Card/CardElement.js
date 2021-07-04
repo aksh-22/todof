@@ -3,7 +3,7 @@ import Avatar from "@material-ui/core/Avatar";
 import classes from "./CardElement.module.css";
 import CheckBoxOutlineBlankSharpIcon from "@material-ui/icons/CheckBoxOutlineBlankSharp";
 import DoneSharpIcon from "@material-ui/icons/DoneSharp";
-import MoreHorizIcon from "@material-ui/icons/MoreHoriz";
+// import MoreHorizIcon from "@material-ui/icons/MoreHoriz";
 import { useDispatch } from "react-redux";
 import { dataActions } from "../../Store/index";
 import Button from "@material-ui/core/Button";
@@ -67,9 +67,8 @@ export default function CardElement(props) {
   return (
     <Paper
       elevation={3}
-      className={`${classes.element} ${check && classes.checked} ${
-        abs && classes.abs
-      }`}
+      className={`${classes.element} ${check && classes.checked} ${abs && classes.abs
+        }`}
     >
       {/* <div
         className={`${classes.element} ${check && classes.checked} ${

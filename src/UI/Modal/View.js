@@ -1,4 +1,4 @@
-import React, { Fragment, useState } from "react";
+import React, { Fragment } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import classes from "./View.module.css";
 import Button from "@material-ui/core/Button";
@@ -12,8 +12,8 @@ import { dataActions } from "../../Store";
 export default function View() {
   const modalData = useSelector((state) => state.modalData[0]);
 
-  const [check, setCheck] = useState(false);
-  const [abs, setAbs] = useState(false);
+  // const [check, setCheck] = useState(false);
+  // const [abs, setAbs] = useState(false);
   const dispath = useDispatch();
 
   const [open, setOpen] = React.useState(false);
@@ -25,16 +25,16 @@ export default function View() {
   const handleClose = () => {
     setOpen(false);
   };
-  let userName;
+  // let userName;
 
   const checkHandler = () => {
     // const confirm = window.confirm("Have you completed this task?");
     // if (confirm) {
     // }
     setOpen(false);
-    setCheck(true);
+    // setCheck(true);
     setTimeout(() => {
-      setAbs(true);
+      // setAbs(true);
     }, 500);
     dispath(dataActions.setTaskStatus(modalData.id));
   };

@@ -5,7 +5,7 @@ import { dataActions } from "../../Store";
 import TextField from "@material-ui/core/TextField";
 import MenuItem from "@material-ui/core/MenuItem";
 import Button from "@material-ui/core/Button";
-import { KeyboardDatePicker } from "@material-ui/pickers";
+// import { KeyboardDatePicker } from "@material-ui/pickers";
 
 const prior = [
   {
@@ -55,7 +55,7 @@ export default function Add() {
   const taskId = useSelector((state) => state.taskId);
 
   const dispath = useDispatch();
-  const currDat = Date.now();
+  // const currDat = Date.now();
   // const days = currDat.getDays();
 
   const enterName = (e) => {
