@@ -42,7 +42,7 @@ export default function CardElement(props) {
     taskName = `${taskName.substring(0, 10)}...`;
   }
 
-  const classP = props.data.priority
+  // const classP = props.data.priority
 
   const checkHandler = () => {
     // const confirm = window.confirm("Have you completed this task?");

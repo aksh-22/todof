@@ -5,18 +5,17 @@ import { useSelector } from "react-redux";
 export default function Employee() {
   const points = useSelector((state) => state.employeePoints);
 
-  console.log(points);
 
   const showList = () =>
-    points.map((el) => {
+    points.map((el, i) => {
       return (
-        <li key={el.value}>
+        <li key={el.i}>
           <p>{el.value}</p>
           <ul>
             {el.points.map((elP) => (
-              <li key={Math.floor(el.value * Math.random * 10000)}>{elP}</li>
+              <li key={i * 10}>{elP}</li>
             ))}
-            <li style={{ fontWeight: "600" }}>
+            <li key={i * 300} style={{ fontWeight: "600" }}>
               total: {el.points.reduce((total, num) => total + num)}
             </li>
           </ul>

@@ -10,8 +10,6 @@ function Card(props) {
     setCardHeight(!cardHeight);
   };
 
-  // console.log(props.task);
-
   const showTask = () => {
     return props.task.length === 0 ? (
       <h1 className={classes.noData}>No Data Found</h1>

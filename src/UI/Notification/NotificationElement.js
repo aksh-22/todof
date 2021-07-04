@@ -30,13 +30,11 @@ export default function NotificationElement(props) {
     taskName = `${taskName.substring(0, 10)}...`;
   }
 
-  console.log(props.data)
-
   useEffect(() => {
-    const addClass = setTimeout(() => {
+    setTimeout(() => {
       setActive(true);
     }, 80 * props.index);
-    const removeClass = setTimeout(() => {
+    setTimeout(() => {
       setActive(false);
     }, 3000 + props.index * 1000);
   }, []);

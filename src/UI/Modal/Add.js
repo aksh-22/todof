@@ -82,7 +82,6 @@ export default function Add() {
   };
   const enterDate = (e) => {
     setDateErr(false);
-    console.log(parseInt(e.target.value.split("-").join("")));
     setDate(e.target.value);
   };
   const EnterAssigned = (e) => {

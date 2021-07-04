@@ -81,7 +81,6 @@ const dataSlice = createSlice({
           state.employeePoints.forEach((el, i2) => {
             if (el.value === state.taskTotal[index].assignedTo) {
               if (state.taskTotal[index].priority === "High") {
-                console.log(sign);
                 state.employeePoints[i2].points.push(sign ? 20 : -20);
               } else if (state.taskTotal[index].priority === "Normal") {
                 state.employeePoints[i2].points.push(sign ? 20 : -10);
@@ -91,7 +90,6 @@ const dataSlice = createSlice({
                 state.employeePoints[i2].points.push(sign ? 50 : -50);
               }
             }
-            console.log(state.employeePoints);
           });
         }
       });
