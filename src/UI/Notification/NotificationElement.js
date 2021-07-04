@@ -18,6 +18,20 @@ export default function NotificationElement(props) {
     );
   };
 
+  let userName;
+  if (props.data.assignedTo) {
+    userName = props.data.assignedTo;
+    if (userName.length > 10) {
+      userName = `${userName.substring(0, 10)}...`;
+    }
+  }
+  let taskName = props.data.title;
+  if (taskName.length > 10) {
+    taskName = `${taskName.substring(0, 10)}...`;
+  }
+
+  console.log(props.data)
+
   useEffect(() => {
     const addClass = setTimeout(() => {
       setActive(true);
@@ -29,11 +43,13 @@ export default function NotificationElement(props) {
 
   return (
     <div
-      className={`${classes.notificationElement} ${active && classes.active}`}
+      className={`${classes.notificationElement} ${active && classes.active}
+       ${props.data.status === 'Overdue' && classes.overDue}`}
       onClick={modalHandler}
+    // style={{ backgroundColor: 'red' }}
     >
-      <p>{props.taskName}</p>
-      <span>-{props.userName}</span>
+      <p>{taskName}</p>
+      <span>-{userName}</span>
     </div>
   );
 }

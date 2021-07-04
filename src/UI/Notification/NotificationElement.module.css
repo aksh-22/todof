@@ -1,34 +1,38 @@
 .notificationElement {
-  display: flex;
-  margin: 1em;
-  justify-content: space-around;
-  text-align: left;
-  background: rgba(0, 0, 0, 0.685);
-  color: #fff;
-  align-items: center;
-  padding: 0.5em 1em;
-  cursor: pointer;
-  transform: translateX(20em);
-  /* animation: hide 0.5s linear 3s; */
-  transition: transform 0.3s linear;
-  position: absolute;
+	display: flex;
+	margin: 1em;
+	justify-content: space-around;
+	text-align: left;
+	background: rgba(0, 0, 0, 0.685);
+	color: #fff;
+	align-items: center;
+	padding: 0.5em 1em;
+	cursor: pointer;
+	transform: translateX(20em);
+	/* animation: hide 0.5s linear 3s; */
+	transition: transform 0.3s linear;
+	position: absolute;
 }
 
 .notificationElement.active {
-  position: relative;
-  transform: translateX(0em);
-  transition: transform 0.3s linear;
+	position: relative;
+	transform: translateX(0em);
+	transition: transform 0.3s linear;
 }
 
 .notificationElement span {
-  font-size: 0.7em;
+	font-size: 0.7em;
+}
+
+.overDue {
+	background: rgba(255, 0, 0, 0.829) !important;
 }
 
 @keyframes hide {
-  from {
-    transform: translateX(0em);
-  }
-  to {
-    transform: translateX(20em);
-  }
+	from {
+		transform: translateX(0em);
+	}
+	to {
+		transform: translateX(20em);
+	}
 }

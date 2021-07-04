@@ -61,9 +61,14 @@ const dataSlice = createSlice({
     setTaskTotal: (state, action) => {
       state.taskTotal.push(action.payload);
       state.taskId = state.taskId + 1;
-      // localStorage.setItem("taskTotal", state.taskTotal);
-      // const a = localStorage.getItem("taskTotal");
-      // console.log(a);
+    },
+    setTaskOverDue: (state, action) => {
+      state.taskTotal.forEach((el, index) => {
+        if (el.id === action.payload) {
+          state.taskTotal[index].status = 'Overdue'
+          return
+        }
+      })
     },
     setTaskStatus: (state, action) => {
       let sign = true;

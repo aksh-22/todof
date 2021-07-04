@@ -29,8 +29,8 @@ export default function CardElement(props) {
   const handleClose = () => {
     setOpen(false);
   };
-  let userName;
 
+  let userName;
   if (props.data.assignedTo) {
     userName = props.data.assignedTo;
     if (userName.length > 10) {

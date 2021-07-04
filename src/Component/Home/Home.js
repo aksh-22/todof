@@ -3,6 +3,8 @@ import Card from "../../UI/Card/Card";
 import classes from "./Home.module.css";
 import { useSelector } from "react-redux";
 import Notification from "../../UI/Notification/Notification";
+import { useDispatch } from "react-redux";
+import { dataActions } from './../../Store/index'
 // import moment from "moment";
 
 function Home() {
@@ -14,20 +16,22 @@ function Home() {
   const [dead, setDead] = useState([]);
   const [notification, setNotification] = useState([]);
   const [init, setInit] = useState(true);
+  const dispath = useDispatch();
+
 
   const tasks = useSelector((state) => state.taskTotal);
 
-  const getTime = () => {
-    const year = new Date().getUTCFullYear();
-    let month = new Date().getMonth();
-    month = month > 9 ? month : "0" + month;
-    let date = new Date().getDate();
-    date = date > 9 ? date : "0" + date;
-    const time = `${year}-${month}-${date}`;
-    // const timeInt = parseInt(time);
-    setCurrDate(time);
-    // return parseInt(time);
-  };
+  // const getTime = () => {
+  //   const year = new Date().getUTCFullYear();
+  //   let month = new Date().getMonth();
+  //   month = month > 9 ? month : "0" + month;
+  //   let date = new Date().getDate();
+  //   date = date > 9 ? date : "0" + date;
+  //   const time = `${year}-${month}-${date}`;
+  //   // const timeInt = parseInt(time);
+  //   setCurrDate(time);
+  //   // return parseInt(time);
+  // };
 
   useEffect(() => {
     // getTime();
@@ -36,6 +40,7 @@ function Home() {
     setPending([]);
     setCompleted([]);
     setDead([]);
+    setDue([])
     tasks.forEach((el) => {
       if (el.status === "Completed") {
         setCompleted((prev) => {
@@ -53,38 +58,53 @@ function Home() {
         });
       } else if (el.status === "Pending") {
         // console.log(parseInt(el.assignedDate.split("-").join("")));
-        setPending((prev) => {
-          const newArr = [...prev, el];
-          return newArr;
-        });
-        console.log(el)
-        // const year = new Date().getUTCFullYear();
-        // let month = new Date().getMonth();
-        // month = month > 9 ? month : "0" + month;
-        // let date = new Date().getDate();
-        // date = date > 9 ? date : "0" + date;
-        // const time = `${year}-${month}-${date}`;
+
         const year = new Date().getUTCFullYear();
         let month = new Date().getMonth() + 1;
-        // month = month > 9 ? month : "0" + month;
         let date = new Date().getDate();
-        // date = date > 9 ? date : "0" + date;
         const time = `${year}-${month}-${date}`;
         const d1 = time.split('-')
         const d2 = el.assignedDate.split('-')
+        console.log(parseInt(d2[1]) - parseInt(d1[1]))
         if (parseInt(d2[1]) - parseInt(d1[1]) === 0) {
-          console.log('aaaaaaaaaaa')
-          console.log(parseInt(d2[2]) - parseInt(d1[2]))
-          if (parseInt(d2[2]) - parseInt(d1[2]) < 3) {
+          if (parseInt(d2[2]) - parseInt(d1[2]) < 0) {
+            console.log('task overDue')
+            dispath(dataActions.setTaskOverDue(el.id));
+            const newData = el
+            newData.status = 'OverDue';
+            setDue((prev) => {
+              const newArr = [...prev, newData];
+              return newArr;
+            });
+            return
+          } else if (parseInt(d2[2]) - parseInt(d1[2]) < 3) {
             setNotification((prev) => {
+              const newArr = [...prev, el];
+              return newArr;
+            });
+            setPending((prev) => {
               const newArr = [...prev, el];
               return newArr;
             });
           }
         } else {
           console.log(parseInt(d2[2]) + (30 * (parseInt(d2[1]) - parseInt(d1[1]))) - parseInt(d1[2]))
+          if ((parseInt(d2[2]) + (30 * (parseInt(d2[1]) - parseInt(d1[1]))) - parseInt(d1[2])) < 0) {
+            console.log('task overDue')
+            dispath(dataActions.setTaskOverDue(el.id));
+            el.status = 'Overdue';
+            setDue((prev) => {
+              const newArr = [...prev, el];
+              return newArr;
+            });
+            return
+          }
           if ((parseInt(d2[2]) + (30 * (parseInt(d2[1]) - parseInt(d1[1]))) - parseInt(d1[2])) < 3) {
             setNotification((prev) => {
+              const newArr = [...prev, el];
+              return newArr;
+            });
+            setPending((prev) => {
               const newArr = [...prev, el];
               return newArr;
             });
@@ -96,20 +116,14 @@ function Home() {
           return newArr;
         });
       } else if (el.status === "Overdue") {
-        console.log("object");
         setDue((prev) => {
           const newArr = [...prev, el];
           return newArr;
         });
-        if (parseInt(currDate - el.assignedDate.split("-").join("")) < 3) {
-          if (init) {
-            setNotification((prev) => {
-              const newArr = [...prev, el];
-              return newArr;
-            });
-          }
-        }
-        console.log(due);
+        setNotification((prev) => {
+          const newArr = [...prev, el];
+          return newArr;
+        });
       }
     });
     setInit(false);
