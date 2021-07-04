@@ -42,6 +42,8 @@ export default function CardElement(props) {
     taskName = `${taskName.substring(0, 10)}...`;
   }
 
+  const classP = props.data.priority
+
   const checkHandler = () => {
     // const confirm = window.confirm("Have you completed this task?");
     // if (confirm) {
@@ -106,11 +108,10 @@ export default function CardElement(props) {
         )}
         {taskName}
       </div>
+      <div className={classes.classP}>{props.data.priority} </div>
       <span className={classes.user}>-{props.data.assignedTo && userName}</span>
-      {/* <div className={classes.more} onClick={handleClickOpen}> */}
       <div className={classes.more} onClick={modalHandler}>
         <VisibilityIcon />
-        {/* <MoreHorizIcon /> */}
       </div>
       {props.status !== "Completed" && (
         <div className={classes.checkBox} onClick={handleClickOpen}>

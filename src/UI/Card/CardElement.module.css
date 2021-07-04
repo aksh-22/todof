@@ -1,64 +1,75 @@
 .element {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin: 0.5em;
-  position: relative;
-  border: 1px solid #fff;
-  background: rgba(0, 0, 0, 0.534);
-  color: #fff;
-  /* color: #000; */
-  height: 5em;
-  font-size: 0.8em;
-  box-shadow: 4px 4px 5px -2px rgba(0, 0, 0, 0.79);
-  -webkit-box-shadow: 4px 4px 5px -2px rgba(0, 0, 0, 0.79);
-  -moz-box-shadow: 4px 4px 5px -2px rgba(0, 0, 0, 0.79);
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	margin: 0.5em;
+	position: relative;
+	border: 1px solid #fff;
+	background: rgba(0, 0, 0, 0.534);
+	color: #fff;
+	/* color: #000; */
+	height: 5em;
+	font-size: 0.8em;
+	box-shadow: 4px 4px 5px -2px rgba(0, 0, 0, 0.79);
+	-webkit-box-shadow: 4px 4px 5px -2px rgba(0, 0, 0, 0.79);
+	-moz-box-shadow: 4px 4px 5px -2px rgba(0, 0, 0, 0.79);
+}
+
+@media (max-width: 800px) {
+	.element {
+		flex-wrap: wrap;
+	}
 }
 
 .element.checked {
-  transform: translateX(-100em);
-  transition: transform 0.5s ease-in-out;
+	transform: translateX(-100em);
+	transition: transform 0.5s ease-in-out;
 }
 
 .element.checked.abs {
-  position: absolute;
+	position: absolute;
 }
 
 .element > * {
-  margin: 1em;
+	margin: 1em;
 }
 
 .user {
-  position: absolute;
-  bottom: 0;
-  right: 0;
-  font-size: 0.6em;
+	position: absolute;
+	bottom: 0;
+	right: 0;
+	font-size: 0.6em;
 }
 
 .details {
-  display: flex;
-  justify-content: center;
-  align-items: center;
+	display: flex;
+	justify-content: center;
+	align-items: center;
 }
 
 .details > * {
-  margin: 1em;
+	margin: 1em;
 }
 
 .checkBox {
-  position: relative;
-  width: auto;
-  height: auto;
-  cursor: pointer;
+	position: relative;
+	width: auto;
+	height: auto;
+	cursor: pointer;
 }
 
 .checkBox > * {
-  position: absolute;
-  top: 50%;
-  right: 0;
-  transform: translateY(-50%);
+	position: absolute;
+	top: 50%;
+	right: 0;
+	transform: translateY(-50%);
 }
 
 .more {
-  cursor: pointer;
+	cursor: pointer;
+}
+
+.Low {
+	padding: 1em;
+	background: yellow !important;
 }
