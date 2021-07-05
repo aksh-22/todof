@@ -27,18 +27,26 @@ const initialState = {
     {
       value: "Akash",
       points: [0],
+      taskName:'',
+      taskStatus:''
     },
     {
       value: "Mike",
       points: [0],
+      taskName:'',
+      taskStatus:''
     },
     {
       value: "Vinay",
       points: [0],
+      taskName:'',
+      taskStatus:''
     },
     {
       value: "Kapil",
       points: [0],
+      taskName:'',
+      taskStatus:''
     },
   ],
 };
@@ -78,16 +86,25 @@ const dataSlice = createSlice({
             sign = false;
           }
           state.taskTotal[index].status = "Completed";
-          state.employeePoints.forEach((el, i2) => {
-            if (el.value === state.taskTotal[index].assignedTo) {
+          // console.log()
+          state.employeePoints.forEach((el2, i2) => {
+            if (el2.value === state.taskTotal[index].assignedTo) {
               if (state.taskTotal[index].priority === "High") {
                 state.employeePoints[i2].points.push(sign ? 20 : -20);
+                state.employeePoints[i2].taskName  = state.taskTotal[index].title
+                state.employeePoints[i2].taskStatus  = state.taskTotal[index].status
               } else if (state.taskTotal[index].priority === "Normal") {
                 state.employeePoints[i2].points.push(sign ? 20 : -10);
+                state.employeePoints[i2].taskName  = state.taskTotal[index].title
+                state.employeePoints[i2].taskStatus  = state.taskTotal[index].status
               } else if (state.taskTotal[index].priority === "Low") {
                 state.employeePoints[i2].points.push(sign ? 5 : -5);
+                state.employeePoints[i2].taskName  = state.taskTotal[index].title
+                state.employeePoints[i2].taskStatus  = state.taskTotal[index].status
               } else if (state.taskTotal[index].priority === "More Prior") {
                 state.employeePoints[i2].points.push(sign ? 50 : -50);
+                state.employeePoints[i2].taskName  = state.taskTotal[index].title
+                state.employeePoints[i2].taskStatus  = state.taskTotal[index].status
               }
             }
           });

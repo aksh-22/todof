@@ -9,6 +9,8 @@ export default function Employee() {
   const tasks = useSelector((state) => state.taskTotal);
   const [height, setHeight] = useState("3em");
 
+  console.log(points)
+
   const expandHandler = (h) => {
     console.log(h);
     setHeight(`${h * 3}em`);

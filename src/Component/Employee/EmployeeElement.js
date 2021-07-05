@@ -30,7 +30,9 @@ export default function EmployeeElement(props) {
       </div>
       <ul>
         {props.data.points.map((elP, i2) => (
-          <li key={i2 * 10}>{elP}</li>
+          <li key={i2 * 10}>
+            <p>{elP} : {props.data.taskName}</p>
+          </li>
         ))}
       </ul>
     </li>
