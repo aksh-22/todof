@@ -22,7 +22,8 @@
   width: 100%;
   display: flex;
   width: 20%;
-  border: 1px solid #000;
+  /* border: 1px solid #000; */
+  background-color: rgb(189, 189, 214);
   flex-grow: 1;
   /* min-height: 120px; */
   /* box-sizing: border-box; */
@@ -32,15 +33,14 @@
 
 .view .box p {
   display: block;
-  word-break: break-all;
 }
 
 .view .box span {
   position: absolute;
-  top: -20%;
+  top: -50%;
   left: 3%;
   padding: 0 0.1em;
-  background: #fff;
+  /* background: #fff; */
   font-size: 0.8em;
 }
 

@@ -8,6 +8,15 @@
   width: 100%;
 }
 
+.completed input {
+  border: none;
+  border-bottom: 1px solid rgb(87, 85, 85);
+}
+
+.head li > * {
+  min-width: 5em;
+}
+
 .head {
   display: flex;
   list-style: none;
@@ -15,19 +24,42 @@
   /* width: 100%; */
 }
 
+.head > * {
+}
+
 .head li {
-  padding: 1em;
+  padding: 0 1em;
   margin: 1em;
   background: rgb(255, 255, 255);
   width: auto;
   display: flex;
   justify-content: center;
-  border: 1px solid #000;
+  /* border: 1px solid #000; */
   border-radius: 5px;
+  font-size: 0.9em;
   align-items: center;
+  color: rgba(0, 0, 0, 0.54);
+  /* border-right: 1px solid #000; */
+  /* background: rgb(94, 142, 156); */
+}
+
+.head label input {
+  margin-top: 1em;
+  font-size: 0.8em;
+
+  /* color: #fff; */
+  color: rgba(0, 0, 0, 0.54);
+}
+
+.head label p {
+  color: rgba(0, 0, 0, 0.54);
 }
 
 .dateRange {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  /* flex-direction: column; */
   /* width: 100% !important; */
 }
 

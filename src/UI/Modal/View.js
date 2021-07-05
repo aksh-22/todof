@@ -8,9 +8,44 @@ import DialogContent from "@material-ui/core/DialogContent";
 import DialogContentText from "@material-ui/core/DialogContentText";
 import DialogTitle from "@material-ui/core/DialogTitle";
 import { dataActions } from "../../Store";
+import Tooltip from "@material-ui/core/Tooltip";
 
 export default function View() {
   const modalData = useSelector((state) => state.modalData[0]);
+
+  let title = modalData.title;
+  if (title.length > 10) {
+    title = `${title.substring(0, 7)}...`;
+  }
+
+  const yearC = new Date().getUTCFullYear();
+  let monthC = new Date().getMonth() + 1;
+  if (monthC < 10) {
+    monthC = `0${monthC}`;
+  }
+  let dateC = new Date().getDate();
+  if (dateC < 10) {
+    dateC = `0${dateC}`;
+  }
+  const time = `${yearC}-${monthC}-${dateC}`;
+
+  let duration = 0;
+  const assignedDateArr = modalData.assignedDate.split("-");
+  // console.log(parseInt(dateC));
+  console.log(parseInt(monthC));
+  console.log(parseInt(assignedDateArr[1]));
+  // console.log(parseInt(assignedDateArr[2]));
+  const a = parseInt(assignedDateArr[1]);
+  const b = parseInt(monthC);
+  const aVal = parseInt(assignedDateArr[2]);
+  const bVal = parseInt(dateC);
+  console.log(a, b);
+  console.log(a === b);
+  console.log(parseInt(assignedDateArr)[1] === parseInt(monthC));
+  if (a === b) {
+    console.log("object");
+    duration = aVal - bVal;
+  }
 
   // const [check, setCheck] = useState(false);
   // const [abs, setAbs] = useState(false);
@@ -67,7 +102,9 @@ export default function View() {
         </Dialog>
         <div className={classes.box}>
           <span>Task Title : </span>
-          <p>{modalData.title}</p>
+          <Tooltip title={modalData.title}>
+            <p>{title}</p>
+          </Tooltip>
         </div>
         <div className={classes.box}>
           <span>assignedTo:</span>
@@ -75,7 +112,7 @@ export default function View() {
         </div>
         <div className={classes.box}>
           <span>duration: </span>
-          <p>{modalData.duration}</p>
+          <p>{duration}</p>
         </div>
         <div className={classes.box}>
           <span>priority: </span>

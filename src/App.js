@@ -9,6 +9,7 @@ import Employee from "./Component/Employee/Employee";
 import IconButton from "@material-ui/core/IconButton";
 import { dataActions } from "./Store";
 import Home2 from "./Component/Home/Home2";
+import Tooltip from "@material-ui/core/Tooltip";
 
 import LibraryAddIcon from "@material-ui/icons/LibraryAdd";
 import { useDispatch, useSelector } from "react-redux";
@@ -49,9 +50,11 @@ function App() {
         <Employee />
       </Route>
       <div className="addBtn" onClick={modalHandler}>
-        <IconButton>
-          <LibraryAddIcon />
-        </IconButton>
+        <Tooltip title="Add Task">
+          <IconButton>
+            <LibraryAddIcon />
+          </IconButton>
+        </Tooltip>
       </div>
     </div>
   );

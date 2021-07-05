@@ -49,6 +49,19 @@ function Completed() {
 
   const [filterType, setFilterType] = useState("assignedTo");
   const [filterVal, setFilterVal] = useState("Akash");
+  const [dateRangeErr, setDateRangeErr] = useState(false);
+
+  const yearC = new Date().getUTCFullYear();
+  let monthC = new Date().getMonth() + 1;
+  if (monthC < 10) {
+    monthC = `0${monthC}`;
+  }
+  let dateC = new Date().getDate();
+  if (dateC < 10) {
+    dateC = `0${dateC}`;
+  }
+  const time1 = `${yearC}-${monthC}-${dateC}`;
+  // const time2 = `${yearC}-${monthC}-${dateC + 1}`;
 
   const [init, setInit] = useState(true);
   useEffect(() => {
@@ -113,7 +126,11 @@ function Completed() {
   };
 
   const enterRangeDate = () => {
-    setFilterType("rangeDate");
+    if (dateOne !== 0 && dateTwo !== 0) {
+      setFilterType("rangeDate");
+    } else {
+      alert("please provide date range");
+    }
     // setFilterVal(dateV);
   };
 
@@ -152,7 +169,6 @@ function Completed() {
             value={priority}
             onChange={EnterPriority}
             // className={`${priorityErr && classes.error}`}
-            variant="outlined"
             defaultValue={prior[0].value}
             // helperText="Please select priority of task"
           >
@@ -168,7 +184,6 @@ function Completed() {
             id="outlined-basic"
             select
             label="Assigned To"
-            variant="outlined"
             defaultValue={assign[0].value}
             value={assigned}
             onChange={EnterAssigned}
@@ -185,30 +200,49 @@ function Completed() {
           </TextField>
         </li>
         <li className={classes.data}>
-          <TextField
-            id="date"
-            label="Deadline"
-            type="date"
-            // defaultValue="2017-05-24"
-            variant="outlined"
-            className={classes.textField}
-            value={date}
-            onChange={enterDate}
-            // className={`${dateErr && classes.error}`}
-            // helperText={dateErr && "Please select a date"}
-            InputLabelProps={{
-              shrink: true,
-            }}
-          />
+          <label>
+            <input
+              type="date"
+              className={classes.textField}
+              value={date}
+              // min={time1}
+              onChange={enterDate}
+              // className={classes.textField}
+              // value={dateOne}
+              // onChange={enterDateOne}
+              // style={{ border: dateErr ? "1px solid red" : "1px solid black" }}
+            />
+            {/* {dateErr ? (
+              <p style={{ fontSize: ".5em", color: "red" }}>select date</p>
+            ) : (
+              <p style={{ fontSize: ".5em" }}>select date</p>
+            )} */}
+          </label>
         </li>
         <li className={classes.dateRange}>
           from :
-          <TextField
+          <label>
+            <input
+              type="date"
+              // value={date}
+              // onChange={enterDate}
+              // min={time1}
+              // className={classes.textField}
+              value={dateOne}
+              onChange={enterDateOne}
+              // style={{ border: dateErr ? "1px solid red" : "1px solid black" }}
+            />
+            {/* {dateErr ? (
+              <p style={{ fontSize: ".5em", color: "red" }}>select date</p>
+            ) : (
+              <p style={{ fontSize: ".5em" }}>select date</p>
+            )} */}
+          </label>
+          {/* <TextField
             id="date"
             label="Deadline"
             type="date"
             // defaultValue="2017-05-24"
-            variant="outlined"
             className={classes.textField}
             value={dateOne}
             onChange={enterDateOne}
@@ -217,23 +251,25 @@ function Completed() {
             InputLabelProps={{
               shrink: true,
             }}
-          />
+          /> */}
           to:
-          <TextField
-            id="date"
-            label="Deadline"
-            type="date"
-            // defaultValue="2017-05-24"
-            variant="outlined"
-            className={classes.textField}
-            value={dateTwo}
-            onChange={enterDateTwo}
-            // className={`${dateErr && classes.error}`}
-            // helperText={dateErr && "Please select a date"}
-            InputLabelProps={{
-              shrink: true,
-            }}
-          />
+          <label>
+            <input
+              type="date"
+              // value={date}
+              // onChange={enterDate}
+              // min={time1}
+              className={classes.textField}
+              value={dateTwo}
+              onChange={enterDateTwo}
+              // style={{ border: dateErr ? "1px solid red" : "1px solid black" }}
+            />
+            {/* {dateErr ? (
+              <p style={{ fontSize: ".5em", color: "red" }}>select date</p>
+            ) : (
+              <p style={{ fontSize: ".5em" }}>select date</p>
+            )} */}
+          </label>
           <Button variant="contained" color="primary" onClick={enterRangeDate}>
             Apply
           </Button>

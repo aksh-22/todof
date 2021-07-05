@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { Fragment, useState } from "react";
 import classes from "./Add.module.css";
 import { useDispatch, useSelector } from "react-redux";
 import { dataActions } from "../../Store";
@@ -44,6 +44,7 @@ export default function Add() {
   const [assigned, setAssigned] = useState("");
   const [priority, setPriority] = useState("");
   const [duration, setDuration] = useState(0);
+  // const [currDate, setCurrDate] = useState("");
 
   const [titleErr, setTitleErr] = useState(false);
   const [descritionErr, setDescritionErr] = useState(false);
@@ -57,6 +58,24 @@ export default function Add() {
   const dispath = useDispatch();
   // const currDat = Date.now();
   // const days = currDat.getDays();
+
+  const yearC = new Date().getUTCFullYear();
+  let monthC = new Date().getMonth() + 1;
+  if (monthC < 10) {
+    monthC = `0${monthC}`;
+  }
+  let dateC = new Date().getDate();
+  if (dateC < 10) {
+    dateC = `0${dateC}`;
+  }
+  const time = `${yearC}-${monthC}-${dateC}`;
+  console.log(time);
+  // min="2021-07-02"
+  console.log("2021-07-02");
+  // useEffect(() => {
+  //   setCurrDate(time);
+  //   console.log(currDate);
+  // }, []);
 
   const enterName = (e) => {
     const regex = /^[A-Za-z0-9 ]+$/;
@@ -76,7 +95,7 @@ export default function Add() {
       alert("Special Characters are not allowed");
       return;
     } else {
-      setAssignedErr(false);
+      setDescritionErr(false);
       setDescrition(e.target.value);
     }
   };
@@ -102,18 +121,19 @@ export default function Add() {
     if (
       title.trim("").length === 0 ||
       descrition.trim("").length === 0 ||
-      date.split("").length === 0 ||
+      date.trim("").length === 0 ||
       assigned.trim().length === 0 ||
-      priority.trim("").length === 0 ||
-      duration <= 0 ||
-      duration >= 30
+      priority.trim("").length === 0
+      // ||
+      // duration <= 0 ||
+      // duration >= 30
     ) {
       if (title.trim("").length === 0) {
         setTitleErr(true);
       } else if (descrition.trim("").length === 0) {
         setDescritionErr(true);
         return;
-      } else if (date.split().length === 0) {
+      } else if (date.trim("").length === 0) {
         setDateErr(true);
         return;
       } else if (assigned.trim().length === 0) {
@@ -144,111 +164,87 @@ export default function Add() {
   };
 
   return (
-    <form className={classes.form} onSubmit={addTask}>
-      <TextField
-        id="outlined-basic"
-        label="title"
-        variant="outlined"
-        value={title}
-        onChange={enterName}
-        inputProps={{ maxLength: 100 }}
-        className={`${titleErr && classes.error}`}
-        helperText={titleErr && "Please provide task title"}
-      />
-      <TextField
-        id="outlined-basic"
-        label="descrition"
-        variant="outlined"
-        value={descrition}
-        inputProps={{ maxLength: 300 }}
-        onChange={enterDescrition}
-        className={`${descritionErr && classes.error}`}
-        helperText={descritionErr && "Please provide task description"}
-      />
-      {/* <TextField
-        id="date"
-        label="Deadline"
-        type="date"
-        // defaultValue="2017-05-24"
-        variant="outlined"
-        className={classes.textField}
-        value={date}
-        onChange={enterDate}
-        minDate={new Date("06-06-2020")}
-        className={`${dateErr && classes.error}`}
-        helperText={dateErr && "Please select a date"}
-        InputLabelProps={{
-          shrink: true,
-        }}
-      /> */}
-
-      <label>
-        <input
-          type="date"
-          value={date}
-          onChange={enterDate}
-          min="2021-07-02"
-          // className={`${dateErr && classes.error}`}
-          // style={
-          //   dateErr ? { border: "1px solid red" } : { border: "1px solid black" }
-          // }
-          style={{ border: dateErr ? "1px solid red" : "1px solid black" }}
+    <Fragment>
+      <h3 style={{ textAlign: "center", padding: ".5em 1em " }}>
+        Assign a Task
+      </h3>
+      <form className={classes.form} onSubmit={addTask}>
+        <TextField
+          id="outlined-basic"
+          label="Title"
+          value={title}
+          onChange={enterName}
+          inputProps={{ maxLength: 100 }}
+          className={`${titleErr && classes.error}`}
+          helperText={titleErr && "Please provide task title"}
         />
-        {dateErr ? (
-          <p style={{ fontSize: ".5em", color: "red" }}>select date</p>
-        ) : (
-          <p style={{ fontSize: ".5em" }}>select date</p>
-        )}
-      </label>
-      <TextField
-        id="outlined-basic"
-        select
-        label="Assigned To"
-        variant="outlined"
-        value={assigned}
-        onChange={EnterAssigned}
-        className={`${assignedErr && classes.error}`}
-        helperText={
-          assignedErr && "Please provide a name of assigned person's name"
-        }
-      >
-        {assign.map((option) => (
-          <MenuItem key={option.value} value={option.value}>
-            {option.value}
-          </MenuItem>
-        ))}
-      </TextField>
-      <TextField
-        id="standard-select"
-        select
-        label="Select"
-        value={priority}
-        onChange={EnterPriority}
-        className={`${priorityErr && classes.error}`}
-        variant="outlined"
-        helperText="Please select priority of task"
-      >
-        {prior.map((option) => (
-          <MenuItem key={option.value} value={option.value}>
-            {option.value}
-          </MenuItem>
-        ))}
-      </TextField>
-      <TextField
-        id="outlined-number"
-        label="Duration"
-        type="number"
-        className={`${durationErr && classes.error}`}
-        InputLabelProps={{
-          shrink: true,
-        }}
-        variant="outlined"
-        value={duration}
-        onChange={EnterDuration}
-      />
-      <Button variant="contained" color="primary" onClick={addTask}>
-        Submit
-      </Button>
-    </form>
+        <TextField
+          id="outlined-basic"
+          label="Description"
+          value={descrition}
+          inputProps={{ maxLength: 300 }}
+          onChange={enterDescrition}
+          className={`${descritionErr && classes.error}`}
+          helperText={descritionErr && "Please provide task description"}
+        />
+
+        <label>
+          <input
+            type="Date"
+            value={date}
+            onChange={enterDate}
+            min={time}
+            style={{
+              border: "none",
+              borderBottom: dateErr
+                ? "1px solid red"
+                : "1px solid rgba(0, 0, 0, 0.54)",
+            }}
+          />
+          {dateErr ? (
+            <p style={{ fontSize: ".5em", color: "red" }}>select date</p>
+          ) : (
+            <p style={{ fontSize: ".5em" }}>select date</p>
+          )}
+        </label>
+        <TextField
+          id="outlined-basic"
+          select
+          label="Assigned To"
+          value={assigned}
+          onChange={EnterAssigned}
+          className={`${assignedErr && classes.error}`}
+          helperText={
+            assignedErr && "Please provide a name of assigned person's name"
+          }
+        >
+          {assign.map((option) => (
+            <MenuItem key={option.value} value={option.value}>
+              {option.value}
+            </MenuItem>
+          ))}
+        </TextField>
+        <TextField
+          id="standard-select"
+          select
+          label="Select"
+          value={priority}
+          onChange={EnterPriority}
+          className={`${priorityErr && classes.error}`}
+          helperText="Please select priority of task"
+        >
+          {prior.map((option) => (
+            <MenuItem key={option.value} value={option.value}>
+              {option.value}
+            </MenuItem>
+          ))}
+        </TextField>
+
+        <div></div>
+        <Button variant="contained" color="primary" onClick={addTask}>
+          Assign
+        </Button>
+      </form>
+    </Fragment>
   );
 }

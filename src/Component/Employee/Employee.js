@@ -1,26 +1,22 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import classes from "./Employee.module.css";
 import { useSelector } from "react-redux";
 
+import EmployeeElement from "./EmployeeElement";
+
 export default function Employee() {
   const points = useSelector((state) => state.employeePoints);
+  const tasks = useSelector((state) => state.taskTotal);
+  const [height, setHeight] = useState("3em");
 
+  const expandHandler = (h) => {
+    console.log(h);
+    setHeight(`${h * 3}em`);
+  };
 
   const showList = () =>
     points.map((el, i) => {
-      return (
-        <li key={el.i}>
-          <p>{el.value}</p>
-          <ul>
-            {el.points.map((elP) => (
-              <li key={i * 10}>{elP}</li>
-            ))}
-            <li key={i * 300} style={{ fontWeight: "600" }}>
-              total: {el.points.reduce((total, num) => total + num)}
-            </li>
-          </ul>
-        </li>
-      );
+      return <EmployeeElement data={el} key={i} />;
     });
   useEffect(() => {
     showList();

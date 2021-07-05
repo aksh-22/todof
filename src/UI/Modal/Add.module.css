@@ -18,16 +18,26 @@
 	grid-gap: 1em; */
 }
 
-.form input {
+.form .dateInput {
   /* margin: 1em; */
   /* outline: 1px solid #fff; */
   /* border: 1px solid #fff;
 	border-radius: 5px;
 	color: #fff; */
+  border: none !important;
+  border-bottom: 1px solid rgb(41, 40, 40) !important;
+  color: rgb(73, 69, 69) !important;
 }
 
-.form input label {
-  color: #fff;
+.form label input {
+  margin-top: 1em;
+  font-size: 0.8em;
+  /* color: #fff; */
+  color: rgba(0, 0, 0, 0.54);
+}
+
+.form label p {
+  color: rgba(0, 0, 0, 0.54);
 }
 
 .formbtn {
@@ -36,8 +46,8 @@
 }
 
 .error input {
-  border: 1px solid red !important;
-  border-radius: 5px;
+  border-bottom: 1px solid red !important;
+  /* border-radius: 5px; */
 }
 
 .error p {

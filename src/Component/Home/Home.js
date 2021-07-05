@@ -4,7 +4,7 @@ import classes from "./Home.module.css";
 import { useSelector } from "react-redux";
 import Notification from "../../UI/Notification/Notification";
 import { useDispatch } from "react-redux";
-import { dataActions } from './../../Store/index'
+import { dataActions } from "./../../Store/index";
 // import moment from "moment";
 
 function Home() {
@@ -18,7 +18,6 @@ function Home() {
   // const [init, setInit] = useState(true);
   const dispath = useDispatch();
 
-
   const tasks = useSelector((state) => state.taskTotal);
 
   useEffect(() => {
@@ -26,7 +25,7 @@ function Home() {
     setPending([]);
     setCompleted([]);
     // setDead([]);
-    setDue([])
+    setDue([]);
     tasks.forEach((el) => {
       if (el.status === "Completed") {
         setCompleted((prev) => {
@@ -49,18 +48,18 @@ function Home() {
         let month = new Date().getMonth() + 1;
         let date = new Date().getDate();
         const time = `${year}-${month}-${date}`;
-        const d1 = time.split('-')
-        const d2 = el.assignedDate.split('-')
+        const d1 = time.split("-");
+        const d2 = el.assignedDate.split("-");
         if (parseInt(d2[1]) - parseInt(d1[1]) === 0) {
           if (parseInt(d2[2]) - parseInt(d1[2]) < 0) {
             dispath(dataActions.setTaskOverDue(el.id));
-            const newData = el
-            newData.status = 'OverDue';
+            const newData = el;
+            newData.status = "OverDue";
             setDue((prev) => {
               const newArr = [...prev, newData];
               return newArr;
             });
-            return
+            return;
           } else if (parseInt(d2[2]) - parseInt(d1[2]) < 3) {
             setNotification((prev) => {
               const newArr = [...prev, el];
@@ -70,22 +69,42 @@ function Home() {
               const newArr = [...prev, el];
               return newArr;
             });
+          } else {
+            setPending((prev) => {
+              const newArr = [...prev, el];
+              return newArr;
+            });
           }
         } else {
-          if ((parseInt(d2[2]) + (30 * (parseInt(d2[1]) - parseInt(d1[1]))) - parseInt(d1[2])) < 0) {
+          if (
+            parseInt(d2[2]) +
+              30 * (parseInt(d2[1]) - parseInt(d1[1])) -
+              parseInt(d1[2]) <
+            0
+          ) {
             dispath(dataActions.setTaskOverDue(el.id));
-            el.status = 'Overdue';
+            el.status = "Overdue";
             setDue((prev) => {
               const newArr = [...prev, el];
               return newArr;
             });
-            return
+            return;
           }
-          if ((parseInt(d2[2]) + (30 * (parseInt(d2[1]) - parseInt(d1[1]))) - parseInt(d1[2])) < 3) {
+          if (
+            parseInt(d2[2]) +
+              30 * (parseInt(d2[1]) - parseInt(d1[1])) -
+              parseInt(d1[2]) <
+            3
+          ) {
             setNotification((prev) => {
               const newArr = [...prev, el];
               return newArr;
             });
+            setPending((prev) => {
+              const newArr = [...prev, el];
+              return newArr;
+            });
+          } else {
             setPending((prev) => {
               const newArr = [...prev, el];
               return newArr;
