@@ -15,8 +15,8 @@ export default function EmployeeElement(props) {
   console.log(props.data);
 
   return (
-    <li
-      style={{ height: expand ? `${props.data.points.length * 4}em` : "2em" }}
+    <li className={classes.list}
+      style={{ height: expand ? `${props.data.points.length * 6}em` : "3em" }}
       key={Math.floor(Math.random() * 10000)}
     >
       <div className={classes.head}>

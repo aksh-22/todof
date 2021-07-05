@@ -1,5 +1,6 @@
-.employee li {
+.list {
   list-style: none;
+  transition: all 0.3s ease-in-out;
 }
 
 .employee > * {
@@ -9,6 +10,8 @@
   /* padding: 1em; */
   text-align: center;
   margin: 1em;
+  transition: all 0.3s ease-in-out !important;
+
   overflow: hidden;
 }
 
